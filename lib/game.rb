@@ -2,6 +2,8 @@ require 'pry'
 require 'amazing_print'
 
 require_relative 'display.rb'
+require_relative 'winchecker.rb'
+
 class Game
   attr_reader :board
   include Display
@@ -14,18 +16,27 @@ class Game
     # check_horizontal
   end
 
-  # def check_horizontal
-  #   counter = 0
-  #   current_player = ""
-  #   binding.pry
-  #   @board.each do |line|
-  #     line.each do |field|
-  #       field == current_player ? counter += 1 : current_player = field
-  #       return current_player if counter == 4
-  #     end
+  def check_horizontal
+    horizontal_checker = WinChecker.new
+    @board.each do |line|
+      line[1].each do |field|
+        return field if horizontal_checker.winner?(field)
+      end
+    end
+    return false
+  end
+
+  # def winner?(field, current_player, counter)
+  #   current_player = field
+  #   if field == current_player 
+  #     counter += 1
+  #   else
+  #     counter = 0
+  #     current_player = field
   #   end
   # end
 end
+
 
 
 

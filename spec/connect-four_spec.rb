@@ -17,6 +17,16 @@ describe Game do
         expect(subject.check_horizontal).to eq("X")
       end
     end
+    describe "#check_vertical" do
+      it "finds a winner" do
+        subject.board[:line1][0] = "X"
+        subject.board[:line2][0] = "X"
+        subject.board[:line3][0] = "X"
+        subject.board[:line4][0] = "X"
+        binding.pry
+        expect(subject.check_vertical).to eq("X")
+      end
+    end
 end
 
 
