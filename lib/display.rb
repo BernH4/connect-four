@@ -1,18 +1,28 @@
 module Display
-  def default_board_arr
-    Array.new(6) { Array.new(9, " ") }
+
+  def code_colors(number)
+    {
+      'X' => "\e[101m  X  \e[0m ",
+      'O' => "\e[44m  O  \e[0m ",
+      '-' => "\e[100m  -  \e[0m "
+    }[number]
   end
 
-  def print_board(board_arr)
-    puts "\n"
-    board_arr.reverse.each do |line|
-      line.each do |field|
-        print "| #{field} "
-      end
-      print "|\n"
-      puts "-" * 37
+  def gen_game_board(height, width)
+    @height = height
+    @width = width
+    game_board = {}
+
+    @height.downto(1) do |i|
+      game_board[:"line#{i}"] = ['-'] * @width 
+    end
+    game_board
+  end
+
+  def print_board
+    @height.downto(1) do |i|
+      @board[:"line#{i}"].each { |num| print code_colors(num) }
+      print "\n\n"
     end
   end
 end
-# include Display
-# print_board(default_board_arr)

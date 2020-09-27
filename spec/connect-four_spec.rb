@@ -4,11 +4,19 @@ describe Game do
   subject { Game.new("pname1","pname2") }
     describe "#default_board_arr" do
       it "returns a valid arr" do
-        expect(subject.board).to be_a(Array)
+        expect(subject.board).to be_a(Hash)
       end
     end
     
-    describe "
+    describe "#check_horizontal" do
+      it "finds a winner" do
+        subject.board[:line1][1] = "X"
+        subject.board[:line1][2] = "X"
+        subject.board[:line1][3] = "X"
+        subject.board[:line1][4] = "X"
+        expect(subject.check_horizontal).to eq("X")
+      end
+    end
 end
 
 
