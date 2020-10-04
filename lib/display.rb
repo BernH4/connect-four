@@ -11,17 +11,13 @@ module Display
   def gen_game_board(height, width)
     @height = height
     @width = width
-    game_board = {}
-
-    @height.downto(1) do |i|
-      game_board[:"line#{i}"] = ['-'] * @width 
-    end
-    game_board
+    game_board = Array.new(@height) { Array.new(@width, "-") } 
   end
 
   def print_board
-    @height.downto(1) do |i|
-      @board[:"line#{i}"].each { |num| print code_colors(num) }
+    # binding.pry
+    (@height-1).downto(0) do |i|
+      @board[i].each { |num| print code_colors(num) }
       print "\n\n"
     end
   end

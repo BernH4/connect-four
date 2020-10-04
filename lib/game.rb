@@ -11,7 +11,8 @@ class Game
     @p1 = p1
     @p2 = p2
     @board = gen_game_board(6, 9) # height, width
-    # binding.pry
+    binding.pry
+    # print_board
     # print_board #debug
     # check_horizontal
   end
@@ -19,22 +20,41 @@ class Game
   def check_horizontal
     horizontal_checker = WinChecker.new
     @board.each do |line|
-      line[1].each do |field|
+      line.each do |field|
         return field if horizontal_checker.winner?(field)
       end
     end
   return false
   end
 
+  def check_vertical
+    x = y = 0
+    vertical_checker = WinChecker.new
+    while x < @width
+      while y < @height
+        field = @board[x][y]
+        return field if vertical_checker.winner?(field)
+        x += 1
+      end
+      x = 0
+      y += 1
+    end
+  end
+
   # def check_vertical
+  #   x = y = 0
   #   vertical_checker = WinChecker.new
-  #   binding.pry
-  #   (1..@width).each do |row|
-  #     @board.each do |line|
-  #     return line[row] if vertical_checker.winner?(line[row])
+  #   while x < @width
+  #     while y < @height
+  #       field = @board[x][y]
+  #       return field if vertical_checker.winner?(field)
+  #       x += 1
   #     end
+  #     x = 0
+  #     y += 1
   #   end
-  # return false
   # end
 
 end
+
+Game.new("p1","p2")
