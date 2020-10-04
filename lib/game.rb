@@ -23,21 +23,18 @@ class Game
         return field if horizontal_checker.winner?(field)
       end
     end
-    return false
+  return false
   end
 
-  # def winner?(field, current_player, counter)
-  #   current_player = field
-  #   if field == current_player 
-  #     counter += 1
-  #   else
-  #     counter = 0
-  #     current_player = field
+  # def check_vertical
+  #   vertical_checker = WinChecker.new
+  #   binding.pry
+  #   (1..@width).each do |row|
+  #     @board.each do |line|
+  #     return line[row] if vertical_checker.winner?(line[row])
+  #     end
   #   end
+  # return false
   # end
+
 end
-
-
-
-
-Game.new("a","b")

@@ -23,7 +23,6 @@ describe Game do
         subject.board[:line2][0] = "X"
         subject.board[:line3][0] = "X"
         subject.board[:line4][0] = "X"
-        binding.pry
         expect(subject.check_vertical).to eq("X")
       end
     end
