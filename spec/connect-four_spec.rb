@@ -33,7 +33,7 @@ describe Game do
         subject.board[1][1] = "X"
         subject.board[2][2] = "X"
         subject.board[3][3] = "X"
-        expect(subject.check_vertical).to eq("X")
+        expect(subject.check_diagonal_up).to eq("X")
       end
     end
 
@@ -43,7 +43,7 @@ describe Game do
         subject.board[6][1] = "X"
         subject.board[7][2] = "X"
         subject.board[8][3] = "X"
-        expect(subject.check_vertical).to eq("X")
+        expect(subject.check_diagonal_up).to eq("X")
       end
     end
 
