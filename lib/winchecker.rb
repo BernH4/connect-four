@@ -1,8 +1,13 @@
+#TODO: Only one winchecker initialize at every new first call
 class WinChecker
   def initialize
     @counter = 1 # Es ist immer einer in einer Reihe
     # current_player = ''
     @field_before = ''
+  end
+
+  def reset
+    initialize
   end
 
   def winner?(field)
