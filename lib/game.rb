@@ -63,21 +63,21 @@ class Game
   end
 
   def check_diagonals(y, x, slope)
-    #TODO: This code doesnt yet work when the winner has a row at the end of field
     @checker.reset
-    field = @board[y][x]
     if slope == "positive"
-      binding.pry if y == 0 && x == 5
-      until y == @height - 1 || x == @width - 1 
-         puts "Height:#{y} Width:#{x}\n~~~"
+      # binding.pry if y == 0 && x == 5
+      until y == @height || x == @width 
+        puts "Height:#{y} Width:#{x}\n~~~"
+        field = @board[y][x]
         return field if @checker.winner?(field)
-        field = @board[y+=1][x+=1]
+        y += 1; x += 1
       end
     else 
       until y == 0 || x == @width
-         puts "Height:#{y}\n Width:#{x}\n~~~"
+        puts "Height:#{y}\n Width:#{x}\n~~~"
+        field = @board[y][x]
         return field if @checker.winner?(field)
-        field = @board[y+=1][x+=1]
+        y -= 1; x += 1
       end
     end
   end
