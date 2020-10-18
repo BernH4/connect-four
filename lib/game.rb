@@ -12,7 +12,7 @@ class Game
     @p2 = p2
     @board = gen_game_board(6, 9) # height, width
     @checker = WinChecker.new
-    # binding.pry
+    @tc = 0 
     # print_board
     # print_board #debug
     # check_horizontal
@@ -44,7 +44,7 @@ class Game
   end
 
   def check_diagonal_up
-     # binding.pry
+    # binding.pry
     print_board
     # Direction: topleft -> bottomleft -> bottom right |__
     x = 0
@@ -52,8 +52,8 @@ class Game
     loop do
       # puts "#{y} #{x}"
       # field = @board[y][x]
-
-      return check_diagonals(y,x,"positive") unless nil
+      winner = check_diagonals(y,x,"positive")
+      return winner unless winner == nil
       y -= 1
       break if y == 0
     end
@@ -61,24 +61,28 @@ class Game
     while x < @width
       # puts "#{y} #{x}"
       # field = @board[y][x]
-      return check_diagonals(y,x,"positive") unless nil
+      winner = check_diagonals(y,x,"positive")
+      return winner unless winner == nil
       x += 1
     end
   end
 
-  def check_diagonals(y, x, slope = 0)
+  def check_diagonals(y, x, slope)
+    #TODO: This code doesnt yet work when the winner has a row at the end of field
     @checker.reset
     field = @board[y][x]
     if slope == "positive"
-      #TODO: HEIGHT AND WIDTH COUNT TO TOTAL HEIGHT NOT THE ARRAY HEIGHT ( -1 )
-      until y == @height || x == @width
-         puts "Height:#{y}\n Width:#{x}\n~~~"
+      binding.pry if y == 0 && x == 5
+      until y == @height - 1 || x == @width - 1 
+         puts "Height:#{y} Width:#{x}\n~~~"
         return field if @checker.winner?(field)
+        # return field if @checker.winner?(field)
         field = @board[y+=1][x+=1]
       end
     else 
       until y == 0 || x == @width
          puts "Height:#{y}\n Width:#{x}\n~~~"
+        # return field if @checker.winner?(field)
         return field if @checker.winner?(field)
         field = @board[y+=1][x+=1]
       end
