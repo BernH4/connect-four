@@ -1,7 +1,9 @@
-#TODO: Only one winchecker initialize at every new first call
+# It saves the last field it was called on and counts same colors in a 
+# row feeded to the method(X or O)
+#
 class WinChecker
   def initialize
-    @counter = 1 # Es ist immer einer in einer Reihe
+    @counter = 1 # Theres always one in a row
     # current_player = ''
     @field_before = ''
     @test = 0

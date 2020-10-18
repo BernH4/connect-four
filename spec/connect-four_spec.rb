@@ -39,10 +39,10 @@ describe Game do
 
     describe "#check_diagonal_up" do
       it "finds a winner" do
-        subject.board[5][0] = "X"
-        subject.board[6][1] = "X"
-        subject.board[7][2] = "X"
-        subject.board[8][3] = "X"
+        subject.board[0][5] = "X"
+        subject.board[1][6] = "X"
+        subject.board[2][7] = "X"
+        subject.board[3][8] = "X"
         expect(subject.check_diagonal_up).to eq("X")
       end
     end
