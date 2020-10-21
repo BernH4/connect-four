@@ -14,8 +14,8 @@ class WinChecker
   end
 
   def winner?(field)
-    p field
-    puts "Counter is at: #{@counter}"
+    # p field
+    # puts "Counter is at: #{@counter}"
     # p @test
     # @test += 1
     if @field_before == field then @counter += 1

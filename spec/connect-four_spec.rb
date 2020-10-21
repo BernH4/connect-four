@@ -14,7 +14,8 @@ describe Game do
         subject.board[1][2] = "X"
         subject.board[1][3] = "X"
         subject.board[1][4] = "X"
-        expect(subject.check_horizontal).to eq("X")
+        subject.check_all
+        expect(subject.winner).to eq("X")
       end
     end
     describe "#check_vertical" do
@@ -23,7 +24,8 @@ describe Game do
         subject.board[2][0] = "X"
         subject.board[3][0] = "X"
         subject.board[4][0] = "X"
-        expect(subject.check_vertical).to eq("X")
+        subject.check_all
+        expect(subject.winner).to eq("X")
       end
     end
 
@@ -33,7 +35,8 @@ describe Game do
         subject.board[1][1] = "X"
         subject.board[2][2] = "X"
         subject.board[3][3] = "X"
-        expect(subject.check_diagonal_up).to eq("X")
+        subject.check_all
+        expect(subject.winner).to eq("X")
       end
     end
 
@@ -43,10 +46,31 @@ describe Game do
         subject.board[1][6] = "X"
         subject.board[2][7] = "X"
         subject.board[3][8] = "X"
-        expect(subject.check_diagonal_up).to eq("X")
+        subject.check_all
+        expect(subject.winner).to eq("X")
       end
     end
 
+    describe "#check_diagonal_down" do
+      it "finds a winner" do
+        subject.board[3][0] = "X"
+        subject.board[2][1] = "X"
+        subject.board[1][2] = "X"
+        subject.board[0][3] = "X"
+        subject.check_all
+        expect(subject.winner).to eq("X")
+      end
+    end
+    describe "#check_diagonal_down" do
+      it "finds a winner" do
+        subject.board[5][5] = "X"
+        subject.board[4][6] = "X"
+        subject.board[3][7] = "X"
+        subject.board[2][8] = "X"
+        subject.check_all
+        expect(subject.winner).to eq("X")
+      end
+    end
 end
 
 
