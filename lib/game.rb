@@ -3,17 +3,28 @@ require 'amazing_print'
 
 require_relative 'display.rb'
 require_relative 'winchecker.rb'
+require_relative 'player.rb'
 
 class Game
-  attr_reader :board, :winner
+  attr_reader :board, :winner, :p1, :p2
   include Display
-  def initialize(p1, p2)  
-    @p1 = p1
-    @p2 = p2
+  def initialize
+    # @p1 = Player.new(get_name(1), "X")
+    # @p2 = Player.new(get_name(2), "O")
+    @p1 = Player.new("Berni", "X")
+    @p2 = Player.new("Gustl", "O")
     @board = gen_game_board(6, 9) # height, width
     @checker = WinChecker.new
     @winner = nil
     # print_board #debug
+  end
+
+  def get_name(nr)
+    nr == 1 ? symbol = "X" : symbol = "O"
+    puts "Player #{nr}, whats your name?"
+    name = gets.chomp
+    puts "Perfect, your symbol is '#{symbol}'\n"
+    name
   end
   
   def check_all
