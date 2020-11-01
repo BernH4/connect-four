@@ -1,32 +1,55 @@
 class Player
+  include Display
+
   def initialize(name, symbol)
     @name = name
     @symbol = symbol
     @last_x = -1
     @last_y = -1
+    @last_board = []
   end
 
-  def move
-    puts "#{@name} choose a field! e.g.: 2, 4"
-    @last_x, @last_y = gets.chomp.split(",")
-    return if outside_board || already_taken
-    puts "works"
+  def move(board)
+    @last_board = board
+    puts "#{@name} choose a field! e.g.: x, y"
+    loop do
+      @last_x, @last_y = gets.chomp.split(",").map(&:to_i)
+      break unless outside_board || already_taken
+    end
+    # Make sure symbol is placed at the lowest position
+    drop
+    print_board(board)
   end
 
-  private
+  def drop
+      # Clear terminal
+      puts "\e[H\e[2J"
+    while @last_board[@last_y - 1][@last_x] == "-" && @last_y != 0
+      @last_board[@last_y][@last_x] = @symbol
+      print_board(@last_board)
+      sleep(0.4)
+      @last_board[@last_y][@last_x] = "-"
+      puts "\e[H\e[2J"
+      @last_y -= 1
+    end
+  @last_board[@last_y][@last_x] = @symbol
+  end
+
 
   def outside_board
-    binding.pry
-    #TODO Game not acessible from here
-    if game.board[@last_y][@last_x].nil?
-      puts "Invalid coordinates! 0 - #{Game.width}, 0 - #{Game.height}"
+    max_x = @last_board[0].length - 1
+    max_y = @last_board.length - 1
+    if @last_y > max_y || @last_x > max_x
+      puts "Invalid coordinates! 0 - #{max_x}, 0 - #{max_y}"
+      return true
     end
   end
 
   def already_taken
-    field = game.board[@last_y][@last_x]
+    field = @last_board[@last_y][@last_x]
     return false if field == "-"
     puts "Sorry already taken!"
+    return true
   end
 
 end

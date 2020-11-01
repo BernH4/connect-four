@@ -14,10 +14,18 @@ module Display
     game_board = Array.new(@height) { Array.new(@width, "-") } 
   end
 
-  def print_board
+  # def print_board
+  #   # binding.pry
+  #   (@height-1).downto(0) do |i|
+  #     @board[i].each { |num| print code_colors(num) }
+  #     print "\n\n"
+  #   end
+  # end
+  #
+  def print_board(board)
     # binding.pry
-    (@height-1).downto(0) do |i|
-      @board[i].each { |num| print code_colors(num) }
+    (board.length - 1).downto(0) do |i|
+      board[i].each { |num| print code_colors(num) }
       print "\n\n"
     end
   end

@@ -16,7 +16,7 @@ class Game
     @board = gen_game_board(6, 9) # height, width
     @checker = WinChecker.new
     @winner = nil
-    # print_board #debug
+    # print_board(@board) #debug
   end
 
   def get_name(nr)
@@ -60,7 +60,7 @@ class Game
 
   def check_diagonal_up
     # binding.pry
-    # print_board
+    # print_board(@board)
     # Direction: topleft -> bottomleft -> bottom right |__
     y = @height - 1
     x = 0
