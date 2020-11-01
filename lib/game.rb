@@ -7,13 +7,14 @@ require_relative 'player.rb'
 
 class Game
   attr_reader :board, :winner, :p1, :p2
+  attr_accessor :board
   include Display
-  def initialize
+  def initialize(height = 6, width = 9)
     # @p1 = Player.new(get_name(1), "X")
     # @p2 = Player.new(get_name(2), "O")
     @p1 = Player.new("Berni", "X")
     @p2 = Player.new("Gustl", "O")
-    @board = gen_game_board(6, 9) # height, width
+    @board = gen_game_board(height, width)
     @checker = WinChecker.new
     @winner = nil
     # print_board(@board) #debug
@@ -32,6 +33,7 @@ class Game
     check_vertical 
     check_diagonal_up 
     check_diagonal_down
+    @winner
   end
 
   def check_horizontal

@@ -11,14 +11,22 @@ class Player
 
   def move(board)
     @last_board = board
+    puts "\e[H\e[2J"
+    print_board(board)
     puts "#{@name} choose a field! e.g.: x, y"
     loop do
-      @last_x, @last_y = gets.chomp.split(",").map(&:to_i)
+      input = gets.chomp
+      unless input =~ /[1-9]+,\s*?[1-9]+/
+        puts "Invalid input, format: x,y"
+        next
+      end
+      @last_x, @last_y = input.split(",").map(&:to_i)
+      # Change to array notation with index 0
+      @last_x, @last_y = @last_x -1, @last_y -1
       break unless outside_board || already_taken
     end
     # Make sure symbol is placed at the lowest position
     drop
-    print_board(board)
   end
 
   def drop
@@ -33,6 +41,8 @@ class Player
       @last_y -= 1
     end
   @last_board[@last_y][@last_x] = @symbol
+  puts `clear`
+  print_board(@last_board)
   end
 
 
