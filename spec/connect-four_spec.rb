@@ -1,7 +1,7 @@
 require './lib/game.rb'
 
 describe Game do
-  subject { Game.new("pname1","pname2") }
+  subject { Game.new(6, 9) }
     describe "#default_board_arr" do
       it "returns a valid arr" do
         expect(subject.board).to be_a(Array)

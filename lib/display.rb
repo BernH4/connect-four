@@ -1,5 +1,6 @@
-module Display
+# frozen_string_literal: true
 
+module Display
   def code_colors(number)
     cc = {
       'X' => "\e[101m  X  \e[0m ",
@@ -13,14 +14,14 @@ module Display
   def gen_game_board(height, width)
     @height = height
     @width = width
-    game_board = Array.new(@height) { Array.new(@width, "-") } 
+    game_board = Array.new(@height) { Array.new(@width, '-') }
   end
 
   def print_board(board)
     # binding.pry
-    board[0].each_with_index do |val, i| 
-      if i == 0
-        print "      "
+    board[0].length.times do |i|
+      if i.zero?
+        print '      '
         next
       end
       print code_colors(i)
